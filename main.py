@@ -1,3 +1,4 @@
+#Import modules
 import io
 import pycurl
 import stem
@@ -17,6 +18,7 @@ def query(url):
 
   output = io.BytesIO()
 
+  #Setting query options
   query = pycurl.Curl()
   query.setopt(pycurl.URL, url)
   query.setopt(pycurl.PROXY, 'localhost')
@@ -46,7 +48,7 @@ print(term.format("Starting Tor:\n", term.Attr.BOLD))
 tor_process = stem.process.launch_tor_with_config (
   config = {
     'SocksPort': str(SOCKS_PORT),
-    'ExitNodes': '{ru}',
+    'ExitNodes': '{ru}', #Russian country code for Stem
   },  
   init_msg_handler = print_bootstrap_lines,
 )
@@ -58,4 +60,4 @@ print('To Russia with Love...')
 
 tor_process.kill()
 
-webbrowser.open_new_tab('https://www.youtube.com/watch?v=VmkySNDX4dU&t=176s')
+webbrowser.open_new_tab('https://www.youtube.com/watch?v=VmkySNDX4dU&t=176s') #Something special
